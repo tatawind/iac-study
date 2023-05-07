@@ -28,7 +28,7 @@ resource "kubernetes_persistent_volume_claim" "cws-code-pvc" {
       requests = {
         storage = "1Gi"
       }
-      limlimits = {
+      llimits = {
         storage = "1Gi"
       }
     }
