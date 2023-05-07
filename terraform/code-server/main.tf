@@ -7,6 +7,12 @@ terraform {
   }
 }
 
+data "kubernetes_namespace" "cloud-workspace" {
+  metadata {
+    name = "cloud-workspace"
+  }
+}
+
 provider "kubernetes" {
   config_path = "~/.kube/config"
 }
@@ -14,7 +20,6 @@ provider "kubernetes" {
 resource "kubernetes_persistent_volume" "cws-code-pvc" {
   metadata {
     name = "cws-code-pvc"
-    namespace = "cloud-workspace"
   }
   spec {
     capacity = {
