@@ -19,7 +19,7 @@ data "kubernetes_namespace" "cloud-workspace" {
 
 resource "kubernetes_persistent_volume_claim" "cws-code-pvc" {
   metadata {
-    name = "cws-code-pvc"
+    name = format("cws-code-pvc-%s", var.user_app_info.user_name)
     namespace = data.kubernetes_namespace.cloud-workspace.metadata[0].name
   }
   spec {
