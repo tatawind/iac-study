@@ -22,11 +22,8 @@ resource "kubernetes_persistent_volume" "cws-code-pvc" {
     name = "cws-code-pvc"
   }
   spec {
-    capacity = {
-      storage = "1Gi"
-    }
     access_modes = ["ReadWriteMany"]
-    persistent_volume_source {
+    resources {
       requests = {
         storage = "1Gi"
       }
