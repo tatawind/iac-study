@@ -4,11 +4,10 @@ variable "user_app_info" {
     app_name     = string
     label_app    = string
   })
-  default = [
-    {
+  default = {
       user_name = "likewind"
       app_name = "cws-codeserver-likewind"
       label_app = "cws-codeserver-likewind"
     }
-  ]
+  
 }
