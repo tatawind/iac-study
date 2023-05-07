@@ -23,7 +23,7 @@ resource "kubernetes_persistent_volume_claim" "cws-code-pvc" {
     namespace = data.kubernetes_namespace.cloud-workspace.metadata[0].name
   }
   spec {
-    access_modes = ["ReadWriteOnce"]
+    access_modes = ["ReadWriteMany"]
     resources {
       requests = {
         storage = "1Gi"
@@ -58,7 +58,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
         }
       }
 
-      spec {
+      spec {        
         container {
           image = "codercom/code-server:latest"
           name  = format("container-%s" , var.user_app_info.app_name)
@@ -86,7 +86,10 @@ resource "kubernetes_deployment" "cws-codeserver" {
           volume_mount {
             name = var.user_app_info.app_name
             mount_path = "/home/coder/project"
-          }
+          }          
+        }
+        security_context {
+          fs_group = 2000
         }
         volume {
           name = var.user_app_info.app_name
