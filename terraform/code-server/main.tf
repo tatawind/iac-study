@@ -104,7 +104,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
 
 resource "kubernetes_service" "cws-codeserver-service" {
   metadata {
-    name = concat("service" , var.user_app_info.app_name)
+    name = concat("service-", var.user_app_info.app_name)
   }
   spec {
     selector = {
