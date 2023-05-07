@@ -24,9 +24,14 @@ resource "kubernetes_persistent_volume" "cws-code-pvc" {
   spec {
     capacity = {
       storage = "1Gi"
-      storage_class_name = "cloud-workspace-ceph"
     }
     access_modes = ["ReadWriteMany"]
+    persistent_volume_source {
+      requests = {
+        storage = "1Gi"
+      }
+    }
+    storage_class_name = "cloud-workspace-ceph"
   }
 }
 
