@@ -72,7 +72,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
               memory = "4Gi"
             }
             requests = {
-              cpu    = "1"
+              cpu    = "0.5"
               memory = "1Gi"
             }
           }
