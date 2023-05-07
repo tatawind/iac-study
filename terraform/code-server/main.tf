@@ -23,9 +23,12 @@ resource "kubernetes_persistent_volume_claim" "cws-code-pvc" {
     namespace = data.kubernetes_namespace.cloud-workspace.metadata[0].name
   }
   spec {
-    access_modes = ["ReadWriteMany"]
+    access_modes = ["ReadWriteOnce"]
     resources {
       requests = {
+        storage = "1Gi"
+      }
+      limlimits = {
         storage = "1Gi"
       }
     }
