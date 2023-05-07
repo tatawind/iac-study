@@ -77,15 +77,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
             }
           }
 
-          env {
-            name = "PASSWORD"
-            value = ""
-          }
-
-           env {
-            name = "HASHED_PASSWORD"
-            value = ""
-          }
+          args = [ "--auth", "none" ]
           
           port {
             container_port = 8080
