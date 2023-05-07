@@ -86,7 +86,8 @@ resource "kubernetes_deployment" "cws-codeserver" {
           volume_mount {
             name = var.user_app_info.app_name
             mount_path = "/home/coder/project"
-          }          
+          }
+          working_dir = "/home/coder/project"
         }
         security_context {
           fs_group = 2000
