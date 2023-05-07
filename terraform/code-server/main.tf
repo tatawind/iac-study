@@ -20,7 +20,7 @@ data "kubernetes_namespace" "cloud-workspace" {
 resource "kubernetes_persistent_volume_claim" "cws-code-pvc" {
   metadata {
     name = "cws-code-pvc"
-    namespace = data.kubernetes_namespace.cloud-workspace.metadata.name
+    namespace = data.kubernetes_namespace.cloud-workspace.metadata[0].name
   }
   spec {
     access_modes = ["ReadWriteMany"]
@@ -39,7 +39,7 @@ resource "kubernetes_persistent_volume_claim" "cws-code-pvc" {
 resource "kubernetes_deployment" "cws-codeserver" {
   metadata {
     name = var.user_app_info.app_name
-    namespace = data.kubernetes_namespace.cloud-workspace.metadata.name
+    namespace = data.kubernetes_namespace.cloud-workspace.metadata[0].name
     labels = {
       app = var.user_app_info.label_app
     }
@@ -107,7 +107,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
 resource "kubernetes_service" "cws-codeserver-service" {
   metadata {
     name = concat("service-", var.user_app_info.app_name)
-    namespace = data.kubernetes_namespace.cloud-workspace.metadata.name
+    namespace = data.kubernetes_namespace.cloud-workspace.metadata[0].name
   }
   spec {
     selector = {
