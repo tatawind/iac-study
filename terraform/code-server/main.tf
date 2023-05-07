@@ -7,24 +7,30 @@ terraform {
   }
 }
 
+
+
+provider "kubernetes" {
+  config_path = "~/.kube/config"
+}
+
 data "kubernetes_namespace" "cloud-workspace" {
   metadata {
     name = "cloud-workspace"
   }
 }
 
-provider "kubernetes" {
-  config_path = "~/.kube/config"
-}
-
-resource "kubernetes_persistent_volume" "cws-code-pvc" {
+resource "kubernetes_persistent_volume_claim" "example" {
   metadata {
     name = "cws-code-pvc"
+    namespace = kubernetes_namespace.cloud-workspace.name
   }
   spec {
     access_modes = ["ReadWriteMany"]
     resources {
       requests = {
+        storage = "1Gi"
+      }
+      limits = {
         storage = "1Gi"
       }
     }
@@ -35,6 +41,7 @@ resource "kubernetes_persistent_volume" "cws-code-pvc" {
 resource "kubernetes_deployment" "cws-codeserver" {
   metadata {
     name = var.user_app_info.app_name
+    namespace = kubernetes_namespace.cloud-workspace.name
     labels = {
       app = var.user_app_info.label_app
     }
@@ -102,6 +109,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
 resource "kubernetes_service" "cws-codeserver-service" {
   metadata {
     name = concat("service-", var.user_app_info.app_name)
+    namespace = kubernetes_namespace.cloud-workspace.name
   }
   spec {
     selector = {
