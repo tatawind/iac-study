@@ -64,7 +64,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
       spec {
         container {
           image = "codercom/code-server:latest"
-          name  = concat(["container-" , var.user_app_info.app_name])
+          name  = format("container-%s" , var.user_app_info.app_name)
 
           resources {
             limits = {
@@ -106,7 +106,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
 
 resource "kubernetes_service" "cws-codeserver-service" {
   metadata {
-    name = concat(["service-", var.user_app_info.app_name])
+    name = format("service-%s" , var.user_app_info.app_name)
     namespace = data.kubernetes_namespace.cloud-workspace.metadata[0].name
   }
   spec {
