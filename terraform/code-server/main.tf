@@ -92,9 +92,6 @@ resource "kubernetes_deployment" "cws-codeserver" {
           }
           working_dir = "/home/coder/project"
         }
-        security_context {
-          fs_group = 2000
-        }
         volume {
           name = var.user_app_info.app_name
           persistent_volume_claim {
