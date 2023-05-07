@@ -52,7 +52,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
       spec {
         container {
           image = "codercom/code-server:latest"
-          name  = "container-" + var.user_app_info.app_name
+          name  = concat("container-" , var.user_app_info.app_name)
 
           resources {
             limits = {
@@ -94,7 +94,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
 
 resource "kubernetes_service" "cws-codeserver-service" {
   metadata {
-    name = "service" + var.user_app_info.app_name
+    name = concat("service" , var.user_app_info.app_name)
   }
   spec {
     selector = {

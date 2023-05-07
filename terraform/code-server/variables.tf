@@ -6,8 +6,8 @@ variable "user_app_info" {
   default = [
     {
       user_name = "likewind"
-      app_name = "cws-codeserver-" + user_name
-      label_app = app_name
+      app_name = "cws-codeserver-likewind"
+      label_app = "cws-codeserver-likewind"
     }
   ]
 }
