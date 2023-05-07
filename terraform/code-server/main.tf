@@ -19,7 +19,7 @@ data "kubernetes_namespace" "cloud-workspace" {
   }
 }
 
-resource "kubernetes_persistent_volume_claim" "example" {
+resource "kubernetes_persistent_volume_claim" "cws-codeserver-pvc" {
   metadata {
     name = "cws-code-pvc"
     namespace = kubernetes_namespace.cloud-workspace.name
