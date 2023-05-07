@@ -1,6 +1,7 @@
 variable "user_app_info" {
   type = object({
     user_name    = string
+    app_name     = string
     label_app    = string
   })
   default = [
