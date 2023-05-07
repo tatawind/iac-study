@@ -96,7 +96,7 @@ resource "kubernetes_deployment" "cws-codeserver" {
         volume {
           name = var.user_app_info.app_name
           persistent_volume_claim {
-            claim_name = kubernetes_persistent_volume.cws-code-pvc.name
+            claim_name = kubernetes_persistent_volume_claim.cws-code-pvc.metadata[0].name
             read_only = false
           }          
         }
