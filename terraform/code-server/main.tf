@@ -79,7 +79,12 @@ resource "kubernetes_deployment" "cws-codeserver" {
 
           env {
             name = "PASSWORD"
-            value = "myadmin@#123"
+            value = ""
+          }
+
+           env {
+            name = "HASHED_PASSWORD"
+            value = ""
           }
           
           port {
